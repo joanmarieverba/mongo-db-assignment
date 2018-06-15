@@ -1,0 +1,64 @@
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><h1>News!</h1></a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><button type="button" class="btn btn-info navbar-btn">Home</button></li>
+                <li><button type="button" class="btn btn-success navbar-btn">Saved Articles</button></li>
+                <li><button type="button" class="btn btn-primary navbar-btn">Scrape New Articles</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="jumbotron">
+        <div>
+            <img src="/assets/img/news-globe.png" class="center" alt="news image">
+        </div>
+    </div>   
+
+    <div id="wrapper">
+        <h1>News Scraper</h1>
+        <h2>
+            <em>If you can do this...the homework should be no problem.</em>
+        </h2>
+        <div id="articles"></div>
+        <div id="notes"></div>
+    </div>
+
+
+{{!-- 
+<div class="row">
+
+    <div class="col-md-7">
+        {{#each burgers}} {{#unless devoured}}
+        <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-4">{{this.id}}. {{this.burger_name}}</div>
+            <div class="col-md-2">
+                <button data-burgerid="{{this.id}}" class="eat-burger">Devour It!</button>
+            </div>
+        </div>
+        {{/unless}} {{/each}}
+    </div>
+
+    <div class="col-md-5">
+        {{#each burgers}} {{#if devoured}}
+        <div class="row">
+            <div class="right">{{this.id}}. {{this.burger_name}}</div>
+        </div>
+        {{/if}} {{/each}}
+    </div>
+
+</div>
+<div class="row space">
+   
+    <form id="btnform" class="inputbutton textcenter">
+        <input type="text" class="inputbox" id="burgerinput">
+        <p><input id="addburger" class="bluebutton" type="submit" value="Submit"></p>
+    </form>
+
+    <h5 class="textcenter">Enter the name of a burger you want to eat. Click the "Submit" button.</h5>
+
+</div>
+ --}}
