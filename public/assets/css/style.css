@@ -1,9 +1,8 @@
 body {
     /* background-color: #F2F6D0 */
-    background-image: url("/assets/img/news-background.jpg");
+    background-image: url("/assets/img/network.jpg");
     background-size: cover;
     font-family: Roboto;
-    color: white;
 }
 
 #wrapper {
@@ -43,4 +42,8 @@ textarea {
 
 .btn {
     margin-left: 2vw;
+}
+
+.navbar {
+    border-radius: 0;
 }
