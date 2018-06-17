@@ -49,15 +49,10 @@ app.get("/", function (req, res) {
 
 // A GET route for scraping the website
 app.get("/scrape", function (req, res) {
+
     // First, we grab the body of the html with request
-    // axios.get("https://medium.com/topic/technology").then(function (response) {
-    
+    request("https://medium.com/topic/technology", (error, response, html) => {
         // Then, we load that into cheerio and save it to $ for a shorthand selector
-        // let $ = cheerio.load(response.data);
-
-        // let result = {};
-
-        request("https://medium.com/topic/technology", (error, response, html) => {
         const $ = cheerio.load(html);
         const results = [];
         const target = "div.u-flexColumnTop.u-flexWrap.u-overflowHidden.u-absolute0.u-xs-relative";
@@ -77,6 +72,7 @@ app.get("/scrape", function (req, res) {
             .children()
             .text();
 
+            //push only if all 3 items found
             if (headline && link && summary) {
                 results.push({
                 headline: headline,
@@ -84,38 +80,25 @@ app.get("/scrape", function (req, res) {
                 summary: summary
                 });
             }
-            
+
         });
+
+         //  Create a new Article using the results object built from scraping
+        db.Article.create(results)
+            .then(function (dbArticle) {
+                // View the added result in the console
+                console.log("reached this point");
+                console.log(dbArticle);
+            })
+            .catch(function (err) {
+                // If an error occurred, send it to the client
+                return res.json(err);
+            });
+
         console.log(results);
         res.send("Scrape Complete");
         });
 
-
-        // Now, we grab every article, and do the following:
-        // $("div.u-flexColumnTop.u-flexWrap").each(function (i, element) {
-
-        //     // Add the text and href of every link, and save them as properties of the result object
-        //     result.headline = $(this).children().children().children().text();
-        //     result.link = $(this).children().children().attr("href");
-        //     result.summary = $(this).children()[1].children().text();
-        //     console.log ('results ', result.headline, result.link, result.summary);
-   
-            // Create a new Article using the `result` object built from scraping
-            // db.Article.create(result)
-            //     .then(function (dbArticle) {
-            //         // View the added result in the console
-            //         console.log(dbArticle);
-            //     })
-            //     .catch(function (err) {
-            //         // If an error occurred, send it to the client
-            //         return res.json(err);
-            //     });
-       // });
-
-        // If we were able to successfully scrape and save an Article, send a message to the client
-    //     console.log("results and results ", result);
-    //     res.send("Scrape Complete");
-    // });
 });
 
 // Route for getting all Articles from the db
