@@ -1,6 +1,7 @@
 // Exporting an object containing all of our models
+// require the file name 
 
 module.exports = {
-    NewsArticle: require("./NewsArticle"),
-    NewsNote: require("./NewsNote")
+    NewsArticle: require("./article"),
+    NewsNote: require("./note")
 };

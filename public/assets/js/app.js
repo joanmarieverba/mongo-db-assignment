@@ -3,9 +3,18 @@ $.getJSON("/articles", function (data) {
     // For each one
     for (var i = 0; i < data.length; i++) {
         // Display the apropos information on the page
-        $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].headline + "<br />" + data[i].link + "<br />" + data[i].summary + "</p>");
+        
+        $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].headline + "<br />" + data[i].url + "<br />" + data[i].summary + "<button data-id='" + data[i]._id + "'>SAVE</button> </p>");
+    
     }
 });
+
+$(".btn-primary").on("click", function(){
+    $.get("/scrape", function(response){
+        console.log(response);
+        location.reload();
+    })
+})
 
 
 // Whenever someone clicks a p tag
@@ -70,3 +79,5 @@ $(document).on("click", "#savenote", function () {
     $("#titleinput").val("");
     $("#bodyinput").val("");
 });
+
+

@@ -13,7 +13,7 @@ const request = require("request");
 
 // Require all models
 const db = require("./models");
-
+//console.log("db ", db);
 const PORT = 3000;
 
 // Initialize Express
@@ -44,7 +44,17 @@ mongoose.connect(MONGODB_URI);
 
 // Main route (show handlebars front end)
 app.get("/", function (req, res) {
-    res.render("index");
+    db.NewsArticle.find({})
+        .then(function (dbNewsArticle) {
+            // If we were able to successfully find Articles, send them back to the client
+//            res.json(dbNewsArticle);
+            res.render("index", dbNewsArticle);
+        })
+        .catch(function (err) {
+            // If an error occurred, send it to the client
+            res.json(err);
+        });
+ //   res.render("index");
 });
 
 // A GET route for scraping the website
@@ -58,7 +68,7 @@ app.get("/scrape", function (req, res) {
         const target = "div.u-flexColumnTop.u-flexWrap.u-overflowHidden.u-absolute0.u-xs-relative";
 
         $(target).each((i, element) => {
-            const link = $(element)
+            const url = $(element)
             .children()
             .children()
             .attr("href");
@@ -73,32 +83,27 @@ app.get("/scrape", function (req, res) {
             .text();
 
             //push only if all 3 items found
-            if (headline && link && summary) {
+            if (headline && url && summary) {
                 results.push({
                 headline: headline,
-                link: link,
+                url: url,
                 summary: summary
                 });
             }
 
         });
 
-         //  Create a new Article using the results object built from scraping
-        db.NewsArticle.create(results)
-            .then(function (dbNewsArticle) {
-                // View the added result in the console
-                console.log("reached this point");
-                console.log(dbNewsArticle);
+        for (let i=0; i<results.length; i++){
+            db.NewsArticle.create(results[i])
+            .then (function(data) {
             })
-            .catch(function (err) {
-                // If an error occurred, send it to the client
+            .catch (function (err) {
+            // If an error occurred, send it to the client
                 return res.json(err);
             });
-
-        console.log(results);
-        res.send("Scrape Complete");
-        });
-
+        };
+        res.send("Scrape complete!");
+    });
 });
 
 // Route for getting all Articles from the db
