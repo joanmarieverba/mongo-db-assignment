@@ -2,15 +2,25 @@
 $.getJSON("/articles", function (data) {
     // For each one
     for (var i = 0; i < data.length; i++) {
-        // Display the apropos information on the page
+        // Display the information on the page
         
-        $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].headline + "<br />" + data[i].url + "<br />" + data[i].summary + "<button data-id='" + data[i]._id + "'>SAVE</button> </p>");
-    
+ //       $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].headline + "<br />" + data[i].url + "<br />" + data[i].summary + "<button data-id='" + data[i]._id + "'>SAVE</button> </p>");
+        $("#articles").append(data[i].headline + "<button data-id='" + data[i]._id + "'>SAVE ARTICLE</button> <p>" + data[i].summary + "<p>");
+
     }
 });
 
+//$("#w3s").attr("href", "https://www.w3schools.com/jquery/");
+
 $(".btn-primary").on("click", function(){
     $.get("/scrape", function(response){
+        console.log(response);
+        location.reload();
+    })
+})
+
+$(".btn-info").on("click", function () {
+    $.get("/", function (response) {
         console.log(response);
         location.reload();
     })

@@ -46,7 +46,7 @@ mongoose.connect(MONGODB_URI);
 app.get("/", function (req, res) {
     db.NewsArticle.find({})
         .then(function (dbNewsArticle) {
-            // If we were able to successfully find Articles, send them back to the client
+            // If we were able to successfully find Articles, display them
 //            res.json(dbNewsArticle);
             res.render("index", dbNewsArticle);
         })
