@@ -47,3 +47,17 @@ textarea {
 .navbar {
     border-radius: 0;
 }
+
+.panel-default {
+    width:100%;
+}
+
+.firstbtn {
+    float: right;
+}
+
+.footer-contrast {
+  color: black;
+  font-weight: bold;
+  text-align: center;
+}

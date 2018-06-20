@@ -5,12 +5,18 @@ $.getJSON("/articles", function (data) {
         // Display the information on the page
         
  //       $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].headline + "<br />" + data[i].url + "<br />" + data[i].summary + "<button data-id='" + data[i]._id + "'>SAVE</button> </p>");
-        $("#articles").append(data[i].headline + "<button data-id='" + data[i]._id + "'>SAVE ARTICLE</button> <p>" + data[i].summary + "<p>");
-
-    }
+ //       $("#articles").append(data[i].headline + "<button data-id='" + data[i]._id + "'>SAVE ARTICLE</button> <p>" + data[i].summary + "<p>");      
+//      $("#articles").append("<a href='" + data[i].url + "'>" + data[i].headline + "</a>"  + "<button data-id='" + data[i]._id + "'>SAVE ARTICLE</button> <p>" + data[i].summary + "<p>");
+ //       $("#articles").append(`</div><a href=${data[i].url}>${data[i].headline}</a><button data-id=${data[i]._id}>SAVE ARTICLE</button><p>${data[i].summary}<p>`);
+        $("#articles").append(`<div class="panel panel-default">
+        <div class="panel-heading">
+        <h3 class="panel-title"><a href=${data[i].url}>${data[i].headline}</a><button class="firstbtn" data-id=${data[i]._id}>SAVE ARTICLE</button><p></h3></div>
+            <div class="panel-body">${data[i].summary}<p></div></div>`);
+}
 });
 
-//$("#w3s").attr("href", "https://www.w3schools.com/jquery/");
+
+
 
 $(".btn-primary").on("click", function(){
     $.get("/scrape", function(response){
