@@ -6,16 +6,16 @@ body {
 }
 
 #wrapper {
-    width: 960px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 5%;
+    /* width: 960px; */
+    margin-left: 1vw;
+    margin-right: 1vw;
+    /* padding-top: 10px; */
 }
  
 #articles {
     display: inline-block;
     overflow: auto;
-    width: 60%;
+    width: 100%;
     height: 700px;
 }
 
@@ -26,8 +26,8 @@ body {
 
 textarea, input {
     display: block;
-    width: 100%;
-    background-color: #FCF5C7;
+    width: 90%;
+    background-color: white;
 }
 
 input {

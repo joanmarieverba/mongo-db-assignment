@@ -1,5 +1,6 @@
 // Grab the articles as a json
 $.getJSON("/articles", function (data) {
+    $("#notebox").hide();
     // For each one
     for (var i = 0; i < data.length; i++) {
         // Display the information on the page
@@ -19,6 +20,7 @@ $.getJSON("/articles", function (data) {
 
 
 $(".btn-primary").on("click", function(){
+    $("#notebox").hide();
     $.get("/scrape", function(response){
         console.log(response);
         location.reload();
@@ -26,6 +28,7 @@ $(".btn-primary").on("click", function(){
 })
 
 $(".btn-info").on("click", function () {
+    $("#notebox").hide();
     $.get("/", function (response) {
         console.log(response);
         location.reload();
