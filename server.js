@@ -87,7 +87,10 @@ app.get("/scrape", function (req, res) {
                 results.push({
                 headline: headline,
                 url: url,
-                summary: summary
+                summary: summary,
+                //set default values
+                saved: false,
+                note: " "
                 });
             }
 
