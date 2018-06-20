@@ -44,6 +44,17 @@ textarea {
     margin-left: 2vw;
 }
 
+.deletebtn {
+    background-color:red;
+    float: right;
+}
+
+.notebtn {
+    background-color: purple;
+    color:white;
+    float: right;
+}
+
 .navbar {
     border-radius: 0;
 }
