@@ -17,6 +17,9 @@ $.getJSON("/articles", function (data) {
 
 // click on scrape button
 $(".btn-primary").on("click", function(){
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+
     $.get("/scrape", function(response){
         console.log(response);
         location.reload();
@@ -25,6 +28,9 @@ $(".btn-primary").on("click", function(){
 
 //click on home button
 $(".btn-info").on("click", function () {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+
     $.get("/", function (response) {
         console.log(response);
         location.reload();
@@ -33,6 +39,8 @@ $(".btn-info").on("click", function () {
 
 //click on saved articles button
 $(".btn-success").on("click", function () {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
     $("#articles").empty();
     // Grab the articles as a json
     $.getJSON("/articles", function (data) {
@@ -66,6 +74,56 @@ $(".btn-success").on("click", function () {
     });
 })
 
+// click on the save article buttom
+$(".firstbtn").on("click", function () {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+    // Save the id from the p tag
+    let saveId = $(this).attr("data-id");
+
+    // Now make an ajax call for the Article
+    $.ajax({
+        method: "GET",
+        url: "/articles/" + saveId
+    })
+        // With that done, nothing else to do
+        .then(function (data) {
+            console.log(data);
+        })
+        .catch (function (err) {
+        // If an error occurred, send it to the client
+        res.json(err);
+        });
+});
+
+//  db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+
+// click on the article note button
+$(".notebtn").on("click", function () {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+    // Save the id from the p tag
+    let noteId = $(this).attr("data-id");
+    let inputNote= $("#submitnote").val().trim();
+
+    // Now make an ajax call for the Article
+    $.ajax({
+        method: "GET",
+        url: "/articles/" + noteId
+    })
+        // With that done, add the note information to the page???
+        .then(function (data) {
+            console.log("notedata", data);
+        })
+        .catch(function (err) {
+            // If an error occurred, send it to the client
+            res.json(err);
+        });
+});
+
+
+
+/////////////////////////////////////////////////////////////////////
 // Whenever someone clicks a p tag
 $(document).on("click", "p", function () {
     // Empty the notes from the note section
