@@ -62,6 +62,8 @@ $(".btn-success").on("click", function () {
                 <button class="deletebtn" data-id=${data[i]._id}>DELETE FROM SAVED</button></h3></div>
                 <div class="panel-body">${data[i].summary}<p></div>
                 
+                <div class="panel-body">${data[i].note}<p></div>
+
                 <div class="panel-body">
                 <form class="create-form inputbutton">
                 <div class="form-group">
@@ -84,7 +86,7 @@ $(".firstbtn").on("click", function () {
     // Now make an ajax call for the Article
     $.ajax({
         method: "GET",
-        url: "/articles/" + saveId
+        url: "/saved/" + saveId
     })
         // With that done, nothing else to do
         .then(function (data) {

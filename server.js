@@ -123,7 +123,7 @@ app.get("/articles", function (req, res) {
         });
 });
 
-// Route for grabbing a specific Article by id, populate it with it's note
+// Route for grabbing a specific Article by id, populate it with its note
 app.get("/articles/:id", function (req, res) {
     // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
     db.NewsArticle.findOne({ _id: req.params.id })
@@ -138,6 +138,16 @@ app.get("/articles/:id", function (req, res) {
             res.json(err);
         });
 });
+
+
+// attempt to change the value of saved
+app.post("/saved/:id", function (req, res) {
+  
+    db.NewsArticle.findOneAndUpdate({ _id: req.params.id }, { saved: true },  { new: true } );
+
+});
+
+//////////////////////////////////
 
 // Route for saving/updating an Article's associated Note
 app.post("/articles/:id", function (req, res) {
@@ -160,6 +170,9 @@ app.post("/articles/:id", function (req, res) {
             res.json(err);
         });
 });
+
+////////////////////////////
+
 
 // Start the server
 app.listen(PORT, function () {
