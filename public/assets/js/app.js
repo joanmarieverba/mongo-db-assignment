@@ -1,6 +1,5 @@
 // Grab the articles as a json
 $.getJSON("/articles", function (data) {
-    $("#notebox").hide();
     // For each one
     for (var i = 0; i < data.length; i++) {
         // Display the information on the page
@@ -18,7 +17,6 @@ $.getJSON("/articles", function (data) {
 
 // click on scrape button
 $(".btn-primary").on("click", function(){
-    $("#notebox").hide();
     $.get("/scrape", function(response){
         console.log(response);
         location.reload();
@@ -27,7 +25,6 @@ $(".btn-primary").on("click", function(){
 
 //click on home button
 $(".btn-info").on("click", function () {
-    $("#notebox").hide();
     $.get("/", function (response) {
         console.log(response);
         location.reload();
@@ -36,7 +33,6 @@ $(".btn-info").on("click", function () {
 
 //click on saved articles button
 $(".btn-success").on("click", function () {
-    $("#notebox").hide();
     $("#articles").empty();
     // Grab the articles as a json
     $.getJSON("/articles", function (data) {
@@ -44,22 +40,31 @@ $(".btn-success").on("click", function () {
         for (var i = 0; i < data.length; i++) {
             // return to true when working
             if (!data[i].saved) {
+                // $("#articles").append(`<div class="panel panel-default">
+                // <div class="panel-heading">
+                // <h3 class="panel-title"><a href=${data[i].url}>${data[i].headline}</a>
+                // <button class="deletebtn" data-id=${data[i]._id}>DELETE FROM SAVED</button></h3></div>
+                // <div class="panel-body">${data[i].summary}
+                // <button class="notebtn" data-id=${data[i]._id}>ARTICLE NOTE</button><p></div>
+                // <div class="panel-body">${data[i].note}<p></div></div>`);
+
                 $("#articles").append(`<div class="panel panel-default">
                 <div class="panel-heading">
                 <h3 class="panel-title"><a href=${data[i].url}>${data[i].headline}</a>
                 <button class="deletebtn" data-id=${data[i]._id}>DELETE FROM SAVED</button></h3></div>
-                <div class="panel-body">${data[i].summary}
-                <button class="notebtn" data-id=${data[i]._id}>ARTICLE NOTE</button><p></h3><p></div>
-                <div class="panel-body">${data[i].note}<p></div></div>`);
+                <div class="panel-body">${data[i].summary}<p></div>
+                
+                <div class="panel-body">
+                <form class="create-form inputbutton">
+                <div class="form-group">
+                <textarea id="submitNote" name="note" rows="1" cols="115">${data[i].note}</textarea>
+                <button class="notebtn" data-id=${data[i]._id}>ARTICLE NOTE</button></form><p></div></div>`);
+
             };
         };
       //  location.reload();
     });
 })
-
-
-
-
 
 // Whenever someone clicks a p tag
 $(document).on("click", "p", function () {

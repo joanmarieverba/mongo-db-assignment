@@ -24,7 +24,7 @@ body {
     width: 30%;
 }
 
-textarea, input {
+/* textarea, input {
     display: block;
     width: 90%;
     background-color: white;
@@ -33,12 +33,12 @@ textarea, input {
 input {
     height: 36px;
     font-size: 24px;
-}
+} */
 
-textarea {
+/* textarea {
     height: 200px;
     font-size: 18px;
-}
+} */
 
 .btn {
     margin-left: 2vw;
