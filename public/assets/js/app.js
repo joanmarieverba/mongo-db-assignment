@@ -89,6 +89,28 @@ $("body").on("click", ".firstbtn", function () {
         });
 });
 
+// click on the delete article from saved buttom
+$("body").on("click", ".deletebtn", function () {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+    // Save the id
+    let holdId = $(this).attr("data-id");
+    console.log("clicked on delete article");
+    // Now make an ajax call for the Article
+    $.ajax({
+        method: "POST",
+        url: "/delete/" + holdId
+    })
+        // With that done, nothing else to do
+        .then(function (data) {
+            console.log(data);
+        })
+        .catch(function (err) {
+            // If an error occurred, send it to the client
+            res.json(err);
+        });
+});
+
 // click on the article note button
 $("body").on("click", ".notebtn", function () {
     // Make sure to preventDefault on a submit event.
@@ -117,8 +139,4 @@ $("body").on("click", ".notebtn", function () {
             res.json(err);
         });
 });
-
-
-
-
 

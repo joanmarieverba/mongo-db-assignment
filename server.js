@@ -142,36 +142,35 @@ app.get("/articles/:id", function (req, res) {
 
 // Save Article: change the value of saved
 app.post("/saved/:id", function (req, res) {
-    console.log("try to save");
-    //db.NewsArticle.findOneAndUpdate({ _id: req.params.id }, { saved: true },  { new: true } );
-
+    
+    //need callback function in order for this to work
     db.NewsArticle.findByIdAndUpdate(req.params.id, {$set : { saved: true }}, { new: true }, function (error, obj){
         if (error ) next (error);
     });
 
 });
 
-//////////////////////////////////
+// Delete Article: change the value of saved
+app.post("/delete/:id", function (req, res) {
+
+    //need callback function in order for this to work
+    db.NewsArticle.findByIdAndUpdate(req.params.id, { $set: { saved: false } }, { new: true }, function (error, obj) {
+        if (error) next(error);
+    });
+
+});
+
 
 // Route for saving/updating an Article's associated Note
 app.post("/articles/:id", function (req, res) {
     // Create a new note and pass the req.body to the entry
         console.log("req.body ", req.body);
+    //need callback function in order for this to work
     db.NewsArticle.findOneAndUpdate(req.params.id, { note: req.body.note }, { new: true }, function (error, obj) {
         if (error) next(error);
     });
-        // })
-        // .then(function (dbNewsArticle) {
-        //     // If we were able to successfully update an Article, send it back to the client
-        //     res.json(dbNewsArticle);
-        // })
-        // .catch(function (err) {
-        //     // If an error occurred, send it to the client
-        //     res.json(err);
-        // });
-});
 
-////////////////////////////
+});
 
 
 // Start the server
