@@ -115,14 +115,15 @@ $("body").on("click", ".deletebtn", function () {
 $("body").on("click", ".notebtn", function () {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
-    // Save the id from the p tag
+    // Save the id 
     let noteId = $(this).attr("data-id");
     let inputNote= $(this).prev().val().trim();
+    console.log("noteID ", noteId),
     console.log("inputnote ", inputNote);
     // store input note as an object
     let objNote = { note: inputNote };
     //clear input box
-    $("#submitnote").val("");
+    $(this).prev().val("");
 
     // Now make an ajax call for the Article
     $.ajax({

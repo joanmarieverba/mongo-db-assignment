@@ -165,8 +165,10 @@ app.post("/delete/:id", function (req, res) {
 app.post("/articles/:id", function (req, res) {
     // Create a new note and pass the req.body to the entry
         console.log("req.body ", req.body);
+    console.log("req.params.id ", req.params.id);
     //need callback function in order for this to work
-    db.NewsArticle.findOneAndUpdate(req.params.id, { note: req.body.note }, { new: true }, function (error, obj) {
+    //db.NewsArticle.findOneAndUpdate(req.params.id, { note: req.body.note }, { new: true }, function (error, obj) {
+    db.NewsArticle.findByIdAndUpdate(req.params.id, { $set: { note: req.body.note } }, { new: true }, function (error, obj) {
         if (error) next(error);
     });
 
