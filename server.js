@@ -84,9 +84,8 @@ app.get("/scrape", function (req, res) {
 
             db.NewsArticle.find({})
                 .then(function (dbNewsArticle) {
-                    // If we were able to successfully find Articles, send them back to the client
-                    console.log("dbNewsArticle", dbNewsArticle);
-
+                    // console.log("dbNewsArticle", dbNewsArticle);
+                    // check for duplicates and undefined entries
                     for (let i = 0; i < dbNewsArticle.length; i++) { 
                         if (headline !== dbNewsArticle[i].headline && headline && url && summary) {
                             results.push({
