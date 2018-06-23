@@ -93,7 +93,6 @@ app.get("/scrape", function (req, res) {
                 note: " "
                 });
             }
-
         });
 
         for (let i=0; i<results.length; i++){
