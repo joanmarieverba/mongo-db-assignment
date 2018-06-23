@@ -88,7 +88,6 @@ app.get("/scrape", function (req, res) {
                     console.log("dbNewsArticle", dbNewsArticle);
 
                     for (let i = 0; i < dbNewsArticle.length; i++) { 
-                    //push only if all 3 items found
                         if (headline !== dbNewsArticle[i].headline && headline && url && summary) {
                             results.push({
                                 headline: headline,
