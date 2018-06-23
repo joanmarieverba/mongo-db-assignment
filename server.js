@@ -82,39 +82,18 @@ app.get("/scrape", function (req, res) {
             .children()
             .text();
 
-            db.NewsArticle.find({})
-                .then(function (dbNewsArticle) {
-                    // console.log("dbNewsArticle", dbNewsArticle);
-                    // check for duplicates and undefined entries
-                    for (let i = 0; i < dbNewsArticle.length; i++) { 
-                        if (headline !== dbNewsArticle[i].headline && headline && url && summary) {
-                            results.push({
-                                headline: headline,
-                                url: url,
-                                summary: summary,
-                                //set default values
-                                saved: false,
-                                note: " "
-                            });
-                        };
-                    };
-                })
-                .catch(function (err) {
-                    // If an error occurred, send it to the client
-                    res.json(err);
+        //push only if all 3 items found
+            if (headline && url && summary) {
+                results.push({
+                    headline: headline,
+                    url: url,
+                    summary: summary,
+                 //set default values
+                    saved: false,
+                    note: " "
                 });
-
-            //push only if all 3 items found
-            // if (headline && url && summary) {
-            //     results.push({
-            //     headline: headline,
-            //     url: url,
-            //     summary: summary,
-            //     //set default values
-            //     saved: false,
-            //     note: " "
-            //     });
-            // }
+            };
+        
         });
 
         for (let i=0; i<results.length; i++){

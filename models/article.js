@@ -9,6 +9,7 @@ var NewsArticleSchema = new Schema({
     // `headline` is required and of type String
     headline: {
         type: String,
+        index: { unique: true },
         required: true
     },
     // `summary` is required and of type String
