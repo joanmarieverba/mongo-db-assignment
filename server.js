@@ -14,7 +14,7 @@ const request = require("request");
 // Require all models
 const db = require("./models");
 //console.log("db ", db);
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Initialize Express
 const app = express();
