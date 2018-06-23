@@ -82,17 +82,41 @@ app.get("/scrape", function (req, res) {
             .children()
             .text();
 
-            //push only if all 3 items found
-            if (headline && url && summary) {
-                results.push({
-                headline: headline,
-                url: url,
-                summary: summary,
-                //set default values
-                saved: false,
-                note: " "
+            db.NewsArticle.find({})
+                .then(function (dbNewsArticle) {
+                    // If we were able to successfully find Articles, send them back to the client
+                    console.log("dbNewsArticle", dbNewsArticle);
+
+                    for (let i = 0; i < dbNewsArticle.length; i++) { 
+                    //push only if all 3 items found
+                        if (headline !== dbNewsArticle[i].headline && headline && url && summary) {
+                            results.push({
+                                headline: headline,
+                                url: url,
+                                summary: summary,
+                                //set default values
+                                saved: false,
+                                note: " "
+                            });
+                        };
+                    };
+                })
+                .catch(function (err) {
+                    // If an error occurred, send it to the client
+                    res.json(err);
                 });
-            }
+
+            //push only if all 3 items found
+            // if (headline && url && summary) {
+            //     results.push({
+            //     headline: headline,
+            //     url: url,
+            //     summary: summary,
+            //     //set default values
+            //     saved: false,
+            //     note: " "
+            //     });
+            // }
         });
 
         for (let i=0; i<results.length; i++){
