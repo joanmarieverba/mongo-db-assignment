@@ -16,7 +16,7 @@
         "cheerio": "^1.0.0-rc.2",
         "express": "^4.22.1",
         "express-handlebars": "^9.0.4",
-        "mongoose": "^8.24.1",
+        "mongoose": "^8.24.7",
         "morgan": "^1.12.1",
         "request": "^2.88.2"
     }
